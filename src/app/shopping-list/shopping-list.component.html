@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-10">
+    <app-shopping-edit></app-shopping-edit>
+    <hr>
+    <ul class="p-0">
+      <li
+        style="cursor: pointer"
+        class="list-group-item dropdown-item"
+        *ngFor="let data of ingredients; let i = index"
+        (click)="onEditItem(i)"
+      >
+       {{data.name}} ({{data.amount}})
+      </li>
+    </ul>
+  </div>
+</div>
