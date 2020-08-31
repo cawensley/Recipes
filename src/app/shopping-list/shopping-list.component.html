@@ -6,7 +6,7 @@
       <li
         style="cursor: pointer"
         class="list-group-item dropdown-item"
-        *ngFor="let data of ingredients; let i = index"
+        *ngFor="let data of (ingredients | async).ingredients; let i = index"
         (click)="onEditItem(i)"
       >
        {{data.name}} ({{data.amount}})
