@@ -2,6 +2,9 @@ import {Component, ElementRef, HostListener, OnDestroy, OnInit} from '@angular/c
 import {DataStorageService} from "../shared/data-storage.service";
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
+import {map} from 'rxjs/operators'
+import {Store} from "@ngrx/store";
+import * as fromAuth from '../app.reducer';
 
 @Component({
   selector: 'app-mainheader',
@@ -30,12 +33,16 @@ export class MainheaderComponent implements OnInit,OnDestroy {
   constructor(
     private elRef: ElementRef,
     private dataStorageService: DataStorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<fromAuth.AppState>,
   ) {}
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user=>{
-      this.isAuthenticated = !!user;
+    this.userSub = this.store
+        .select('auth')
+        .pipe(map(authstate => authstate.user))
+        .subscribe(user=>{
+          this.isAuthenticated = !!user;
     });
   }
 
