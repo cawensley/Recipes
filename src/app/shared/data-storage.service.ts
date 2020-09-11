@@ -11,7 +11,7 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private recipesService: RecipeService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   storeRecipes() {
